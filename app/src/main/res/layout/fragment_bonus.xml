@@ -42,7 +42,7 @@
             caverna:min="0"
             caverna:max="4"
             caverna:label="Adjacent dwellings"
-            caverna:icon="@drawable/adjacent_dwellings" />
+            caverna:myIcon="@drawable/adjacent_dwellings" />
 
         <ch.quazz.caverna.widget.CountingInput
             android:id="@+id/stone"
@@ -52,7 +52,7 @@
             caverna:min="0"
             caverna:max="30"
             caverna:label="@string/stone"
-            caverna:icon="@drawable/stone" />
+            caverna:myIcon="@drawable/stone" />
 
         <ch.quazz.caverna.widget.CountingInput
             android:id="@+id/ore"
@@ -62,7 +62,7 @@
             caverna:min="0"
             caverna:max="30"
             caverna:label="@string/ore"
-            caverna:icon="@drawable/ore" />
+            caverna:myIcon="@drawable/ore" />
 
         <ch.quazz.caverna.widget.CountingInput
             android:id="@+id/weapons"
@@ -72,7 +72,7 @@
             caverna:min="0"
             caverna:max="7"
             caverna:label="Armed dwarfs"
-            caverna:icon="@drawable/weapon" />
+            caverna:myIcon="@drawable/weapon" />
 
     </LinearLayout>
 

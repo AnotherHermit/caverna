@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -20,7 +21,8 @@ public class CountingInput extends LinearLayout {
     private String label = "";
 
     private final TextView countText;
-    private final SeekBar countSlider;
+//    private final SeekBar countSlider;
+    private final NumberPicker numberPicker;
 
     private OnCountChangeListener listener;
 
@@ -45,22 +47,50 @@ public class CountingInput extends LinearLayout {
         max = attributes.getInteger(R.styleable.CountingInput_max, 100);
 
         ImageView icon = (ImageView)findViewById(R.id.count_icon);
-        icon.setImageDrawable(attributes.getDrawable(R.styleable.CountingInput_icon));
+        icon.setImageDrawable(attributes.getDrawable(R.styleable.CountingInput_myIcon));
 
         attributes.recycle();
 
         count = min;
 
         countText = (TextView)findViewById(R.id.count_text);
-        countSlider = (SeekBar)findViewById(R.id.count_slider);
+        numberPicker = (NumberPicker) findViewById(R.id.count_numberPicker);
+//        countSlider = (SeekBar)findViewById(R.id.count_slider);
 
-        setupSeekbar();
+        setupNumberPicker();
+//        setupSeekbar();
+    }
+
+    private void setupNumberPicker() {
+        //Populate NumberPicker values from minimum and maximum value range
+        //Set the minimum value of NumberPicker
+        numberPicker.setMinValue(min);
+        //Specify the maximum value/number of NumberPicker
+        numberPicker.setMaxValue(max);
+        numberPicker.setValue(count);
+        //Gets whether the selector wheel wraps when reaching the min/max value.
+        // NOTE: Setting this to false leads to strange behavior when trying to scroll away from min
+        // or max values, not sure why
+        numberPicker.setWrapSelectorWheel(true);
+
+        //Set a value change listener for NumberPicker
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                //Display the newly selected number from picker
+                count = newVal;
+                updateText();
+                if (listener != null) {
+                    listener.onCountChanged(CountingInput.this, count, true);
+                }
+            }
+        });
     }
 
     public void setCount(int count) {
         this.count = count;
-
-        countSlider.setProgress(this.count - min);
+        numberPicker.setValue(this.count - min);
+//        countSlider.setProgress(this.count - min);
         updateText();
     }
 
@@ -69,15 +99,14 @@ public class CountingInput extends LinearLayout {
     }
 
     public interface OnCountChangeListener {
-        public abstract void onCountChanged(CountingInput input, int count, boolean fromUser);
+        void onCountChanged(CountingInput input, int count, boolean fromUser);
     }
 
     public void setOnCountChangeListener(OnCountChangeListener listener) {
         this.listener = listener;
     }
-
+/*
     private void setupSeekbar() {
-
         countSlider.setMax(max - min);
         countSlider.setProgress(count - min);
         updateText();
@@ -101,6 +130,7 @@ public class CountingInput extends LinearLayout {
             }
         });
     }
+*/
 
     private void updateText() {
         countText.setText(label + ": " + Integer.toString(count));
