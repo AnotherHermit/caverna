@@ -12,12 +12,12 @@ import ch.quazz.caverna.score.Token;
 public class BonusFragment extends PlayerScoreFragment {
 
 
-    private static final TokenController.Item BonusItems[] = {
-            new TokenController.Item(R.id.stone, Token.Stone),
-            new TokenController.Item(R.id.ore, Token.Ore),
-            new TokenController.Item(R.id.weapons, Token.Weapons),
-            new TokenController.Item(R.id.adjacent_dwellings, Token.AdjacentDwellings),
-    };
+/*    private static final TokenAdapter.Item BonusItems[] = {
+            new TokenAdapter.Item(R.id.stone, Token.Stone),
+            new TokenAdapter.Item(R.id.ore, Token.Ore),
+            new TokenAdapter.Item(R.id.weapons, Token.Weapons),
+            new TokenAdapter.Item(R.id.adjacent_dwellings, Token.AdjacentDwellings),
+    };*/
 
     private static final TileAdapter.Item BonusTiles[] = {
             new TileAdapter.Item(Tile.WeavingParlor, R.drawable.weaving_parlor),
@@ -43,11 +43,11 @@ public class BonusFragment extends PlayerScoreFragment {
     };
 
     private final TileController tileController;
-    private final TokenController tokenController;
+//    private final TokenAdapter tokenAdapter;
 
     public BonusFragment() {
         tileController = new TileController(BonusTiles);
-        tokenController = new TokenController(BonusItems);
+//        tokenAdapter = new TokenAdapter(BonusItems);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class BonusFragment extends PlayerScoreFragment {
             }
         });
 
-        tokenController.setup(playerScore, getActivity());
+//        tokenAdapter.setup(playerScore, getActivity());
     }
 
     private void optionalVisibility() {

@@ -57,17 +57,18 @@ public class CountingInput extends LinearLayout {
         numberPicker = (NumberPicker) findViewById(R.id.count_numberPicker);
 //        countSlider = (SeekBar)findViewById(R.id.count_slider);
 
-        setupNumberPicker();
+//        setupNumberPicker();
 //        setupSeekbar();
     }
 
-    private void setupNumberPicker() {
+/*    private void setupNumberPicker() {
         //Populate NumberPicker values from minimum and maximum value range
         //Set the minimum value of NumberPicker
         numberPicker.setMinValue(min);
         //Specify the maximum value/number of NumberPicker
         numberPicker.setMaxValue(max);
         numberPicker.setValue(count);
+
         //Gets whether the selector wheel wraps when reaching the min/max value.
         // NOTE: Setting this to false leads to strange behavior when trying to scroll away from min
         // or max values, not sure why
@@ -85,7 +86,7 @@ public class CountingInput extends LinearLayout {
                 }
             }
         });
-    }
+    }*/
 
     public void setCount(int count) {
         this.count = count;

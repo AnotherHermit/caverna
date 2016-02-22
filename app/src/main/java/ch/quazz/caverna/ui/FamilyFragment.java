@@ -11,10 +11,12 @@ import ch.quazz.caverna.score.Token;
 
 public class FamilyFragment extends PlayerScoreFragment {
 
-    private static final TokenController.Item FamilyItems[] = {
-            new TokenController.Item(R.id.dwarfs, Token.Dwarfs),
-            new TokenController.Item(R.id.dwellings, Token.Dwellings)
+/*
+    private static final TokenAdapter.Item FamilyItems[] = {
+            new TokenAdapter.Item(R.id.dwarfs, Token.Dwarfs),
+            new TokenAdapter.Item(R.id.dwellings, Token.Dwellings)
     };
+*/
 
     private static final TileAdapter.Item[] Dwellings = {
             new TileAdapter.Item(Tile.SimpleDwelling_4_2, R.drawable.simple_dwelling_1),
@@ -24,11 +26,11 @@ public class FamilyFragment extends PlayerScoreFragment {
             new TileAdapter.Item(Tile.AdditionalDwelling, R.drawable.additional_dwelling),
     };
 
-    private final TokenController familyItemController;
+//    private final TokenAdapter familyItemController;
     private final TileController dwellingsController;
 
     public FamilyFragment() {
-        familyItemController = new TokenController(FamilyItems);
+//        familyItemController = new TokenAdapter(FamilyItems);
         dwellingsController = new TileController(Dwellings);
     }
 
@@ -41,7 +43,7 @@ public class FamilyFragment extends PlayerScoreFragment {
     @Override
     public void onResume() {
         super.onResume();
-        familyItemController.setup(playerScore, getActivity());
+//        familyItemController.setup(playerScore, getActivity());
         dwellingsController.setup(playerScore, getActivity(), R.id.special_dwellings);
     }
 }
