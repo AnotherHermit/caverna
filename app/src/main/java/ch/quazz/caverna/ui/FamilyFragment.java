@@ -1,6 +1,7 @@
 package ch.quazz.caverna.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class FamilyFragment extends PlayerScoreFragment {
     public void onResume() {
         super.onResume();
 //        familyItemController.setup(playerScore, getActivity());
+//        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.)
         dwellingsController.setup(playerScore, getActivity(), R.id.special_dwellings);
     }
 }

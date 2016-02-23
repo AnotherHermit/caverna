@@ -22,7 +22,7 @@ public class CountingInput extends LinearLayout {
 
     private final TextView countText;
 //    private final SeekBar countSlider;
-    private final NumberPicker numberPicker;
+//    private final NumberPicker numberPicker;
 
     private OnCountChangeListener listener;
 
@@ -54,7 +54,7 @@ public class CountingInput extends LinearLayout {
         count = min;
 
         countText = (TextView)findViewById(R.id.count_text);
-        numberPicker = (NumberPicker) findViewById(R.id.count_numberPicker);
+//        numberPicker = (NumberPicker) findViewById(R.id.count_numberPicker);
 //        countSlider = (SeekBar)findViewById(R.id.count_slider);
 
 //        setupNumberPicker();
@@ -90,7 +90,7 @@ public class CountingInput extends LinearLayout {
 
     public void setCount(int count) {
         this.count = count;
-        numberPicker.setValue(this.count - min);
+//        numberPicker.setValue(this.count - min);
 //        countSlider.setProgress(this.count - min);
         updateText();
     }

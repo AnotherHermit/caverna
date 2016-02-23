@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.wefika.horizontalpicker.HorizontalPicker;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.quazz.caverna.R;
@@ -46,19 +49,22 @@ class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.CountViewHolder> {
         return mData.size();
     }
 
-    class CountViewHolder extends RecyclerView.ViewHolder implements NumberPicker.OnValueChangeListener {
+    class CountViewHolder extends RecyclerView.ViewHolder implements HorizontalPicker.OnItemSelected {
         TextView title;
         ImageView icon;
-        NumberPicker numberPicker;
+        //        NumberPicker numberPicker;
+        HorizontalPicker horizontalPicker;
         int position;
         TokenItem current;
         final PlayerScore playerScore;
+
+        ArrayList<String> valueRange;
 
         public CountViewHolder(View itemView, final PlayerScore playerScore) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.count_text);
             icon = (ImageView) itemView.findViewById(R.id.count_icon);
-            numberPicker = (NumberPicker) itemView.findViewById(R.id.count_numberPicker);
+            horizontalPicker = (HorizontalPicker) itemView.findViewById(R.id.count_horizontalPicker);
             this.playerScore = playerScore;
         }
 
@@ -68,61 +74,28 @@ class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.CountViewHolder> {
             this.position = position;
             this.current = current;
 
-            // Set up number picker min and max values
-            this.numberPicker.setMinValue(numberPicker.getResources().getInteger(current.getMinValue()));
-            this.numberPicker.setMaxValue(numberPicker.getResources().getInteger(current.getMaxValue()));
-            this.numberPicker.setValue(playerScore.getCount(current.getToken()));
+            if(valueRange == null) {
+                this.valueRange = new ArrayList<>();
+                Integer min = horizontalPicker.getResources().getInteger(current.getMinValue());
+                Integer max = horizontalPicker.getResources().getInteger(current.getMaxValue());
 
-            //Gets whether the selector wheel wraps when reaching the min/max value.
-            // NOTE: Setting this to false leads to strange behavior when trying to scroll away from min
-            // or max values, not sure why
-            this.numberPicker.setWrapSelectorWheel(true);
+                for (int i = min; i <= max; i++) {
+                    valueRange.add(Integer.toString(i));
+                }
+                horizontalPicker.setValues(valueRange.toArray(new CharSequence[valueRange.size()]));
+
+            }
+            Integer currentValue = playerScore.getCount(current.getToken());
+            horizontalPicker.setSelectedItem(valueRange.indexOf(currentValue.toString()));
         }
 
         public void setListeners() {
-            this.numberPicker.setOnValueChangedListener(CountViewHolder.this);
+            this.horizontalPicker.setOnItemSelectedListener(CountViewHolder.this);
         }
 
         @Override
-        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-            playerScore.setCount(current.getToken(), newVal);
+        public void onItemSelected(int index) {
+            playerScore.setCount(current.getToken(), Integer.parseInt(valueRange.get(index)));
         }
     }
-
-
-    /*
-        final static class Item {
-        final int id;
-        final Token item;
-
-        Item(int id, Token item) {
-            this.id = id;
-            this.item = item;
-        }
-    }
-
-    private final Item items[];
-
-    TokenAdapter(final Item items[]) {
-        this.items = items;
-    }
-
-    void setup(final PlayerScore playerScore, Activity activity) {
-
-        CountingInput.OnCountChangeListener listener = new CountingInput.OnCountChangeListener() {
-            @Override
-            public void onCountChanged(CountingInput input, int count, boolean fromUser) {
-                if (fromUser) {
-                    playerScore.setCount((Token)input.getTag(), count);
-                }
-            }
-        };
-
-        for (final Item item : items) {
-            CountingInput countingInput = (CountingInput)activity.findViewById(item.id);
-            countingInput.setTag(item.item);
-            countingInput.setCount(playerScore.getCount(item.item));
-            countingInput.setOnCountChangeListener(listener);
-        }
-    }*/
 }

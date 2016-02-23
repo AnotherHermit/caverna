@@ -22,15 +22,11 @@
         android:layout_weight="1"
         android:textSize="20sp"/>
 
-    <NumberPicker
-        android:id="@+id/count_numberPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:descendantFocusability="blocksDescendants"/>
-
-    <!--<SeekBar-->
-        <!--android:id="@+id/count_slider"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <com.wefika.horizontalpicker.HorizontalPicker
+        android:id="@+id/count_horizontalPicker"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
 </LinearLayout>
