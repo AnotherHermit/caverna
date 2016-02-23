@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <integer name="wealth_min">0</integer>
-    <integer name="wealth_max">100</integer>
-</resources>

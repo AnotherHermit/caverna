@@ -86,9 +86,23 @@ public class TokenItem {
         list.add(new TokenItem(R.string.ore_mines,      R.string.dogs_description, Token.OreMines,      R.drawable.ore_mine,        R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.ruby_mines,     R.string.dogs_description, Token.RubyMines,     R.drawable.ruby_mine,       R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.unused_tiles,   R.string.dogs_description, Token.UnusedSpace,   R.drawable.unused,          R.integer.wealth_min, R.integer.wealth_max));
-
         return list;
     }
 
+    public static ArrayList<TokenItem> getFamilyItems() {
+        ArrayList<TokenItem> list = new ArrayList<>();
+        list.add(new TokenItem(R.string.dwarfs,     R.string.dogs_description, Token.Dwarfs,    R.drawable.dwarf,    R.integer.dwarfs_min,    R.integer.dwarfs_max));
+        list.add(new TokenItem(R.string.dwellings,  R.string.dogs_description, Token.Dwellings, R.drawable.dwelling, R.integer.dwellings_min, R.integer.dwellings_max));
+        return list;
+    }
+
+    public static ArrayList<TokenItem> getBonusItems() {
+        ArrayList<TokenItem> list = new ArrayList<>();
+        list.add(new TokenItem(R.string.ore,                R.string.dogs_description, Token.Ore,               R.drawable.ore,                R.integer.wealth_min,    R.integer.wealth_max));
+        list.add(new TokenItem(R.string.stone,              R.string.dogs_description, Token.Stone,             R.drawable.stone,              R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new TokenItem(R.string.weapons,            R.string.dogs_description, Token.Weapons,           R.drawable.weapon,             R.integer.dwarfs_min,    R.integer.dwarfs_max));
+        list.add(new TokenItem(R.string.adjacent_dwellings, R.string.dogs_description, Token.AdjacentDwellings, R.drawable.adjacent_dwellings, R.integer.adjacent_min, R.integer.adjacent_max));
+        return list;
+    }
 
 }

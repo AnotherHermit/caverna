@@ -69,8 +69,8 @@ class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.CountViewHolder> {
             this.current = current;
 
             // Set up number picker min and max values
-            this.numberPicker.setMinValue(current.getMinValue());
-            this.numberPicker.setMaxValue(current.getMaxValue());
+            this.numberPicker.setMinValue(numberPicker.getResources().getInteger(current.getMinValue()));
+            this.numberPicker.setMaxValue(numberPicker.getResources().getInteger(current.getMaxValue()));
             this.numberPicker.setValue(playerScore.getCount(current.getToken()));
 
             //Gets whether the selector wheel wraps when reaching the min/max value.
@@ -85,7 +85,6 @@ class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.CountViewHolder> {
 
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-//            picker.setValue(newVal);
             playerScore.setCount(current.getToken(), newVal);
         }
     }

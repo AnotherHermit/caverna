@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dwellings_min">0</integer>
+    <integer name="dwellings_max">10</integer>
+    <integer name="dwarfs_min">2</integer>
+    <integer name="dwarfs_max">6</integer>
+    <integer name="wealth_min">0</integer>
+    <integer name="wealth_max">100</integer>
+    <integer name="adjacent_min">0</integer>
+    <integer name="adjacent_max">4</integer>
+</resources>

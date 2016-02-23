@@ -35,5 +35,7 @@
     <string name="delete">Delete</string>
     <string name="title_activity_players">Players</string>
     <string name="dogs_description">This is the descriptionID for the dogs token!</string>
+    <string name="adjacent_dwellings">Adjacent dwellings</string>
+    <string name="weapons">Armed dwarfs</string>
 
 </resources>
