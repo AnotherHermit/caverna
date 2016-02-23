@@ -1,38 +1,20 @@
 package ch.quazz.caverna.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ch.quazz.caverna.R;
+import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.Tile;
 import ch.quazz.caverna.score.Token;
 
 public class FamilyFragment extends PlayerScoreFragment {
 
-/*
-    private static final TokenAdapter.Item FamilyItems[] = {
-            new TokenAdapter.Item(R.id.dwarfs, Token.Dwarfs),
-            new TokenAdapter.Item(R.id.dwellings, Token.Dwellings)
-    };
-*/
-
-    private static final TileAdapter.Item[] Dwellings = {
-            new TileAdapter.Item(Tile.SimpleDwelling_4_2, R.drawable.simple_dwelling_1),
-            new TileAdapter.Item(Tile.SimpleDwelling_3_3, R.drawable.simple_dwelling_2),
-            new TileAdapter.Item(Tile.MixedDwelling, R.drawable.mixed_dwelling),
-            new TileAdapter.Item(Tile.CoupleDwelling, R.drawable.couple_dwelling),
-            new TileAdapter.Item(Tile.AdditionalDwelling, R.drawable.additional_dwelling),
-    };
-
-//    private final TokenAdapter familyItemController;
-    private final TileController dwellingsController;
-
     public FamilyFragment() {
-//        familyItemController = new TokenAdapter(FamilyItems);
-        dwellingsController = new TileController(Dwellings);
     }
 
     @Override
@@ -44,8 +26,9 @@ public class FamilyFragment extends PlayerScoreFragment {
     @Override
     public void onResume() {
         super.onResume();
-//        familyItemController.setup(playerScore, getActivity());
-//        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.)
-        dwellingsController.setup(playerScore, getActivity(), R.id.special_dwellings);
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.family_recycler);
+        ItemAdapter adapter = new ItemAdapter(getActivity(), Item.getFamilyItems(), playerScore);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

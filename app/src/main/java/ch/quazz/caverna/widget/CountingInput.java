@@ -7,8 +7,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import ch.quazz.caverna.R;
@@ -29,7 +27,7 @@ public class CountingInput extends LinearLayout {
     public CountingInput(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        LayoutInflater.from(context).inflate(R.layout.counting_input, this, true);
+        LayoutInflater.from(context).inflate(R.layout.token_item, this, true);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -46,14 +44,14 @@ public class CountingInput extends LinearLayout {
         min = attributes.getInteger(R.styleable.CountingInput_min, 0);
         max = attributes.getInteger(R.styleable.CountingInput_max, 100);
 
-        ImageView icon = (ImageView)findViewById(R.id.count_icon);
+        ImageView icon = (ImageView)findViewById(R.id.image_icon);
         icon.setImageDrawable(attributes.getDrawable(R.styleable.CountingInput_myIcon));
 
         attributes.recycle();
 
         count = min;
 
-        countText = (TextView)findViewById(R.id.count_text);
+        countText = (TextView)findViewById(R.id.title_text);
 //        numberPicker = (NumberPicker) findViewById(R.id.count_numberPicker);
 //        countSlider = (SeekBar)findViewById(R.id.count_slider);
 
@@ -64,9 +62,9 @@ public class CountingInput extends LinearLayout {
 /*    private void setupNumberPicker() {
         //Populate NumberPicker values from minimum and maximum value range
         //Set the minimum value of NumberPicker
-        numberPicker.setMinValue(min);
+        numberPicker.setMinValueID(min);
         //Specify the maximum value/number of NumberPicker
-        numberPicker.setMaxValue(max);
+        numberPicker.setMaxValueID(max);
         numberPicker.setValue(count);
 
         //Gets whether the selector wheel wraps when reaching the min/max value.

@@ -1,53 +1,20 @@
 package ch.quazz.caverna.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ch.quazz.caverna.R;
+import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.Tile;
 import ch.quazz.caverna.score.Token;
 
 public class BonusFragment extends PlayerScoreFragment {
 
-
-/*    private static final TokenAdapter.Item BonusItems[] = {
-            new TokenAdapter.Item(R.id.stone, Token.Stone),
-            new TokenAdapter.Item(R.id.ore, Token.Ore),
-            new TokenAdapter.Item(R.id.weapons, Token.Weapons),
-            new TokenAdapter.Item(R.id.adjacent_dwellings, Token.AdjacentDwellings),
-    };*/
-
-    private static final TileAdapter.Item BonusTiles[] = {
-            new TileAdapter.Item(Tile.WeavingParlor, R.drawable.weaving_parlor),
-            new TileAdapter.Item(Tile.MilkingParlor, R.drawable.milking_parlor),
-            new TileAdapter.Item(Tile.StateParlor, R.drawable.state_parlor),
-            new TileAdapter.Item(Tile.HuntingParlor, R.drawable.hunting_parlor),
-            new TileAdapter.Item(Tile.BeerParlor, R.drawable.beer_parlor),
-            new TileAdapter.Item(Tile.BlacksmithingParlor, R.drawable.blacksmithing_parlor),
-
-            new TileAdapter.Item(Tile.StoneStorage, R.drawable.stone_storage),
-            new TileAdapter.Item(Tile.OreStorage, R.drawable.ore_storage),
-            new TileAdapter.Item(Tile.SparePartStorage, R.drawable.spare_part_storage),
-            new TileAdapter.Item(Tile.MainStorage, R.drawable.main_storage),
-            new TileAdapter.Item(Tile.WeaponStorage, R.drawable.weapon_storage),
-            new TileAdapter.Item(Tile.SuppliesStorage, R.drawable.supplies_storage),
-
-            new TileAdapter.Item(Tile.BroomChamber, R.drawable.broom_chamber),
-            new TileAdapter.Item(Tile.TreasureChamber, R.drawable.treasure_chamber),
-            new TileAdapter.Item(Tile.FoodChamber, R.drawable.food_chamber),
-            new TileAdapter.Item(Tile.PrayerChamber, R.drawable.prayer_chamber),
-            new TileAdapter.Item(Tile.WritingChamber, R.drawable.writing_chamber),
-            new TileAdapter.Item(Tile.FodderChamber, R.drawable.fodder_chamber)
-    };
-
-    private final TileController tileController;
-//    private final TokenAdapter tokenAdapter;
-
     public BonusFragment() {
-        tileController = new TileController(BonusTiles);
-//        tokenAdapter = new TokenAdapter(BonusItems);
     }
 
     @Override
@@ -59,51 +26,9 @@ public class BonusFragment extends PlayerScoreFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        optionalVisibility();
-
-        tileController.setup(playerScore, getActivity(), R.id.bonus_tiles);
-        tileController.setOnSelectionChangeListener(new TileController.OnSelectionChangeListener() {
-            @Override
-            public void onSelectionChanged() {
-                optionalVisibility();
-            }
-        });
-
-//        tokenAdapter.setup(playerScore, getActivity());
-    }
-
-    private void optionalVisibility() {
-        View view = getActivity().findViewById(R.id.stone);
-        if (playerScore.has(Tile.StoneStorage)) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-
-        view = getActivity().findViewById(R.id.ore);
-        if (playerScore.has(Tile.OreStorage)) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-
-        boolean showWeapons = playerScore.has(Tile.WeaponStorage) ||
-                playerScore.has(Tile.SuppliesStorage) ||
-                playerScore.has(Tile.PrayerChamber);
-
-        view = getActivity().findViewById(R.id.weapons);
-        if (showWeapons) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-
-        view = getActivity().findViewById(R.id.adjacent_dwellings);
-        if (playerScore.has(Tile.StateParlor)) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.bonus_recycler);
+        ItemAdapter adapter = new ItemAdapter(getActivity(), Item.getBonusItems(), playerScore);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

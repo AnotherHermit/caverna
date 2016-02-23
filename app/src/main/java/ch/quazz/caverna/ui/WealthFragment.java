@@ -7,9 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ch.quazz.caverna.score.Token;
 import ch.quazz.caverna.R;
-import ch.quazz.caverna.score.TokenItem;
+import ch.quazz.caverna.score.Item;
 
 public class WealthFragment extends PlayerScoreFragment {
 
@@ -27,9 +26,8 @@ public class WealthFragment extends PlayerScoreFragment {
     public void onResume() {
         super.onResume();
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.wealth_recycler);
-        TokenAdapter adapter = new TokenAdapter(getActivity(), TokenItem.getWealthItems(), playerScore);
+        ItemAdapter adapter = new ItemAdapter(getActivity(), Item.getWealthItems(), playerScore);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        wealthController.setup(playerScore, getActivity());
     }
 }
