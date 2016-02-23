@@ -6,28 +6,27 @@ import ch.quazz.caverna.R;
 
 public class TileItem extends Item {
     private Tile tile;
-    private boolean additionalCounter;
+    private Token bonusToken;
 
-    public TileItem(int title, int descriptionID, Tile tile, int imageID, boolean additionalCounter) {
+    public TileItem(int title, int descriptionID, Tile tile, int imageID, Token bonusToken) {
         super(title, descriptionID, imageID);
         this.tile = tile;
-        this.additionalCounter = additionalCounter;
+        this.bonusToken = bonusToken;
     }
 
     public Tile getTile() {
         return tile;
     }
 
-    public boolean hasAdditionalCounter() {
-        return additionalCounter;
+    public Token getBonusToken() {
+        return bonusToken;
     }
 
     public void setTile(Tile tile) {
        this.tile = tile;
     }
 
-    public void setAdditionalCounter(boolean additionalCounter) {
-        this.additionalCounter = additionalCounter;
+    public void setBonusToken(Token bonusToken) {
+        this.bonusToken = bonusToken;
     }
-
 }

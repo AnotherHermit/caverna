@@ -2,6 +2,7 @@ package ch.quazz.caverna.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,9 @@ import java.util.List;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.PlayerScore;
+import ch.quazz.caverna.score.Tile;
 import ch.quazz.caverna.score.TileItem;
+import ch.quazz.caverna.score.Token;
 import ch.quazz.caverna.score.TokenItem;
 
 class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
@@ -122,14 +125,13 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
             super.setData(current, position);
             this.current = (TokenItem) current;
             horizontalPicker = (HorizontalPicker) itemView.findViewById(R.id.token_horizontalPicker);
-            if(valueRange == null) {
-                valueRange = new ArrayList<>();
-                Integer min = horizontalPicker.getResources().getInteger(this.current.getMinValueID());
-                Integer max = horizontalPicker.getResources().getInteger(this.current.getMaxValueID());
 
-                for (int i = min; i <= max; i++) {
-                    valueRange.add(Integer.toString(i));
-                }
+            valueRange = new ArrayList<>();
+            Integer min = horizontalPicker.getResources().getInteger(this.current.getMinValueID());
+            Integer max = horizontalPicker.getResources().getInteger(this.current.getMaxValueID());
+
+            for (int i = min; i <= max; i++) {
+                valueRange.add(Integer.toString(i));
             }
 
             Integer currentValue = playerScore.getCount(this.current.getToken());
@@ -139,6 +141,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
             horizontalPicker.setOnItemSelectedListener(null);
             horizontalPicker.setValues(valueRange.toArray(new CharSequence[valueRange.size()]));
             horizontalPicker.setSelectedItem(valueRange.indexOf(currentValue.toString()));
+            horizontalPicker.setSideItems(1);
             horizontalPicker.setOnItemSelectedListener(CountTokenViewHolder.this);
         }
 

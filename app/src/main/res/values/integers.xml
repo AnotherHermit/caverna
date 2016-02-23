@@ -8,4 +8,6 @@
     <integer name="wealth_max">100</integer>
     <integer name="adjacent_min">0</integer>
     <integer name="adjacent_max">4</integer>
+    <integer name="weapons_min">0</integer>
+    <integer name="weapons_max">6</integer>
 </resources>
