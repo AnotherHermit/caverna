@@ -3,6 +3,7 @@ package ch.quazz.caverna.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +21,11 @@ import ch.quazz.caverna.R;
 import ch.quazz.caverna.data.ScoreTable;
 import ch.quazz.caverna.games.Game;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Toolbar.OnMenuItemClickListener {
 
     private CavernaDbHelper dbHelper;
     private GamesAdapter gamesAdapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +44,15 @@ public class MainActivity extends Activity {
                 startGameActivity(id);
             }
         });
+
+        setToolbar();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.title_activity_game);
+        toolbar.inflateMenu(R.menu.main);
+        toolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
@@ -62,6 +66,11 @@ public class MainActivity extends Activity {
 
         ListView listView = (ListView)findViewById(R.id.games_list);
         listView.setAdapter(gamesAdapter);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return true;
     }
 
     @Override

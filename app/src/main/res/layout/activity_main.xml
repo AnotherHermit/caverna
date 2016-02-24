@@ -14,6 +14,10 @@
 
     tools:context="ch.quazz.caverna.ui.MainActivity" >
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

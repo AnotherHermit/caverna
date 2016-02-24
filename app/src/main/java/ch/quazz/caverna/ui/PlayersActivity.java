@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -23,11 +24,12 @@ import ch.quazz.caverna.data.PlayerTable;
 import ch.quazz.caverna.data.ScoreTable;
 import ch.quazz.caverna.games.Player;
 
-public class PlayersActivity extends Activity {
+public class PlayersActivity extends Activity implements Toolbar.OnMenuItemClickListener {
 
     private CavernaDbHelper dbHelper;
     private PlayersAdapter playersAdapter;
     private long gameId;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +56,20 @@ public class PlayersActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        setToolbar();
+
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.title_activity_players);
+        toolbar.inflateMenu(R.menu.players);
+        toolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.players, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -73,7 +78,7 @@ public class PlayersActivity extends Activity {
             addPlayerName();
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override

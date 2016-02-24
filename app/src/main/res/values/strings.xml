@@ -84,5 +84,9 @@
     <string name="prayer_chamber">Prayer Chamber</string>
     <string name="writing_chamber">Writing Chamber</string>
     <string name="fodder_chamber">Fodder Chamber</string>
+    <string name="discard">Discard</string>
+    <string name="done">Done</string>
+    <string name="add_player">Add Player</string>
+    <string name="delete_game">Delete Game</string>
 
 </resources>

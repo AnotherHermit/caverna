@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context="ch.quazz.caverna.ui.PlayersActivity" >
+    tools:context="ch.quazz.caverna.ui.PlayersActivity">
 
     <item android:id="@+id/players_add_player"
         android:icon="@drawable/ic_action_user_add"
         android:title="@string/ok"
-        android:showAsAction="always" />
+        app:showAsAction="always" />
 
 </menu>

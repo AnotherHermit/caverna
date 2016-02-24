@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context="ch.quazz.caverna.ui.GameActivity" >
+    tools:context="ch.quazz.caverna.ui.GameActivity">
 
     <item android:id="@+id/game_delete_game"
         android:icon="@drawable/ic_action_delete"
-        android:title="@string/delete"
-        android:showAsAction="ifRoom" />
+        android:title="@string/delete_game"
+        app:showAsAction="always" />
 
     <item android:id="@+id/game_add_player"
         android:icon="@drawable/ic_action_user_add"
-        android:title="@string/ok"
-        android:showAsAction="always" />
+        android:title="@string/add_player"
+        app:showAsAction="always" />
 
 </menu>

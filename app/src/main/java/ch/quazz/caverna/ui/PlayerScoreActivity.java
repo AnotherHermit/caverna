@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,18 +20,18 @@ import ch.quazz.caverna.score.PlayerScore;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.widget.StoppableViewPager;
 
-public class PlayerScoreActivity extends FragmentActivity {
+public class PlayerScoreActivity extends FragmentActivity implements Toolbar.OnMenuItemClickListener {
 
     public final static String ExtraScoreId = "ch.quazz.caverna.ScoreId";
 
     private CavernaDbHelper dbHelper;
     private PlayerScore playerScore;
-
     private long scoreId;
 
     PlayerScorePagerAdapter pagerAdapter;
     StoppableViewPager viewPager;
     TabLayout tabLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class PlayerScoreActivity extends FragmentActivity {
             dbHelper = new CavernaDbHelper(this);
         }
 
+        setToolbar();
+
         viewPager = (StoppableViewPager) findViewById(R.id.pager);
         pagerAdapter = new PlayerScorePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragments();
@@ -52,6 +55,13 @@ public class PlayerScoreActivity extends FragmentActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.score);
+        toolbar.inflateMenu(R.menu.player_score);
+        toolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
@@ -81,32 +91,26 @@ public class PlayerScoreActivity extends FragmentActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (getActionBar() != null) {
-            outState.putInt("navigation_index", getActionBar().getSelectedNavigationIndex());
+        if (tabLayout != null) {
+            outState.putInt("navigation_index", tabLayout.getSelectedTabPosition());
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (getActionBar() != null) {
-            getActionBar().setSelectedNavigationItem(savedInstanceState.getInt("navigation_index"));
+        if (tabLayout != null) {
+            tabLayout.setScrollPosition(savedInstanceState.getInt("navigation_index"), 0, true);
         }
     }
 
     private void updateScore() {
         String score = String.valueOf(playerScore.score());
-        setTitle(getString(R.string.score) + ": " + score);
+        toolbar.setTitle(getString(R.string.score) + ": " + score);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.player_score, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.player_score_ok:
                 finish();
@@ -118,7 +122,7 @@ public class PlayerScoreActivity extends FragmentActivity {
                 return true;
 
             default:
-                return super.onOptionsItemSelected(item);
+                return true;
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -26,12 +27,13 @@ import ch.quazz.caverna.data.GamesTable;
 import ch.quazz.caverna.data.ScoreTable;
 import ch.quazz.caverna.score.ScoreSheet;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements Toolbar.OnMenuItemClickListener {
     final static String ExtraGameId = "ch.quazz.caverna.GameId";
 
     private CavernaDbHelper dbHelper;
     private GamePlayerAdapter scoringPadAdapter;
     private long gameId;
+    Toolbar toolbar;
 
     private static final class Row {
         final ScoreSheet.Category category;
@@ -86,17 +88,19 @@ public class GameActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.title_activity_game);
+        toolbar.inflateMenu(R.menu.game);
+        toolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.game, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.game_add_player:
@@ -114,7 +118,7 @@ public class GameActivity extends Activity {
                 return true;
 
             default:
-                return super.onOptionsItemSelected(item);
+                return true;
         }
     }
 
