@@ -34,15 +34,18 @@ public class Item {
         list.add(new TokenItem(R.string.donkeys,        R.string.dogs_description, Token.Donkeys,       R.drawable.donkey,          R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.boars,          R.string.dogs_description, Token.Boars,         R.drawable.boar,            R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.cattle,         R.string.dogs_description, Token.Cattle,        R.drawable.cattle,          R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TokenItem(R.string.grain,          R.string.dogs_description, Token.Grains,        R.drawable.grain,           R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.vegetable,      R.string.dogs_description, Token.Vegetables,    R.drawable.vegetable,       R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.rubies,         R.string.dogs_description, Token.Rubies,        R.drawable.ruby,            R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.gold,           R.string.dogs_description, Token.Gold,          R.drawable.gold,            R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.begging_markers,R.string.dogs_description, Token.BeggingMarkers,R.drawable.begging_marker,  R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TokenItem(R.string.small_pastures, R.string.dogs_description, Token.SmallPastures, R.drawable.small_pasture,   R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.large_pastures, R.string.dogs_description, Token.LargePastures, R.drawable.large_pasture,   R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.ore_mines,      R.string.dogs_description, Token.OreMines,      R.drawable.ore_mine,        R.integer.wealth_min, R.integer.wealth_max));
         list.add(new TokenItem(R.string.ruby_mines,     R.string.dogs_description, Token.RubyMines,     R.drawable.ruby_mine,       R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TokenItem(R.string.unused_tiles,   R.string.dogs_description, Token.UnusedSpace,   R.drawable.unused,          R.integer.wealth_min, R.integer.wealth_max));
         return list;
     }
@@ -52,25 +55,13 @@ public class Item {
         list.add(new TokenItem(R.string.dwarfs,             R.string.dogs_description,     Token.Dwarfs,            R.drawable.dwarf,    R.integer.dwarfs_min,    R.integer.dwarfs_max));
         list.add(new TokenItem(R.string.weapons,            R.string.dogs_description,     Token.Weapons,           R.drawable.weapon,   R.integer.weapons_min,   R.integer.weapons_max));
         list.add(new TokenItem(R.string.dwellings,          R.string.dogs_description,     Token.Dwellings,         R.drawable.dwelling, R.integer.dwellings_min, R.integer.dwellings_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.simple_dwelling,     R.string.dwelling_description, Tile.SimpleDwelling_4_2, R.drawable.simple_dwelling_1,   null));
         list.add(new TileItem(R.string.simple_dwelling,     R.string.dwelling_description, Tile.SimpleDwelling_3_3, R.drawable.simple_dwelling_2,   null));
         list.add(new TileItem(R.string.mixed_dwelling,      R.string.dwelling_description, Tile.MixedDwelling,      R.drawable.mixed_dwelling,      null));
         list.add(new TileItem(R.string.couple_dwelling,     R.string.dwelling_description, Tile.CoupleDwelling,     R.drawable.couple_dwelling,     null));
         list.add(new TileItem(R.string.additional_dwelling, R.string.dwelling_description, Tile.AdditionalDwelling, R.drawable.additional_dwelling, null));
         return list;
-    }
-
-    public static Item getOreToken() {
-        return new TokenItem(R.string.ore, R.string.dogs_description, Token.Ore, R.drawable.ore, R.integer.wealth_min, R.integer.wealth_max);
-    }
-    public static Item getStoneToken() {
-        return new TokenItem(R.string.stone, R.string.dogs_description, Token.Stone, R.drawable.stone, R.integer.wealth_min, R.integer.wealth_max);
-    }
-    public static Item getWeaponToken() {
-        return new TokenItem(R.string.weapons, R.string.dogs_description, Token.Weapons, R.drawable.weapon, R.integer.dwarfs_min, R.integer.dwarfs_max);
-    }
-    public static Item getAdjacentToken() {
-        return new TokenItem(R.string.adjacent_dwellings, R.string.dogs_description, Token.AdjacentDwellings, R.drawable.adjacent_dwellings, R.integer.adjacent_min, R.integer.adjacent_max);
     }
 
     public static ArrayList<Item> getCaveItems() {
@@ -106,15 +97,20 @@ public class Item {
         ArrayList<Item> list = new ArrayList<>();
         list.add(new TileItem(R.string.weaving_parlor, R.string.dwelling_description, Tile.WeavingParlor, R.drawable.weaving_parlor, null));
         list.add(new TileItem(R.string.milking_parlor, R.string.dwelling_description, Tile.MilkingParlor, R.drawable.milking_parlor, null));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.state_parlor, R.string.dwelling_description, Tile.StateParlor, R.drawable.state_parlor, Token.AdjacentDwellings));
         list.add(new TokenItem(R.string.adjacent_dwellings, R.string.dogs_description, Token.AdjacentDwellings, R.drawable.adjacent_dwellings, R.integer.adjacent_min, R.integer.adjacent_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.hunting_parlor, R.string.dwelling_description, Tile.HuntingParlor, R.drawable.hunting_parlor, null));
         list.add(new TileItem(R.string.beer_parlor, R.string.dwelling_description, Tile.BeerParlor, R.drawable.beer_parlor, null));
         list.add(new TileItem(R.string.blacksmithing_parlor, R.string.dwelling_description, Tile.BlacksmithingParlor, R.drawable.blacksmithing_parlor, null));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.stone_storage, R.string.dwelling_description, Tile.StoneStorage, R.drawable.stone_storage, Token.Stone));
         list.add(new TokenItem(R.string.stone,R.string.dogs_description, Token.Stone, R.drawable.stone, R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.ore_storage, R.string.dwelling_description, Tile.OreStorage, R.drawable.ore_storage, Token.Ore));
         list.add(new TokenItem(R.string.ore, R.string.dogs_description, Token.Ore, R.drawable.ore, R.integer.wealth_min, R.integer.wealth_max));
+        list.add(new Item(0, 0, 0)); // Separator
         list.add(new TileItem(R.string.spare_part_storage, R.string.dwelling_description, Tile.SparePartStorage, R.drawable.spare_part_storage, null));
         list.add(new TileItem(R.string.main_storage, R.string.dwelling_description, Tile.MainStorage, R.drawable.main_storage, null));
         list.add(new TileItem(R.string.supplies_storage, R.string.dwelling_description, Tile.SuppliesStorage, R.drawable.supplies_storage, null));

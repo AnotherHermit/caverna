@@ -1,18 +1,22 @@
 package ch.quazz.caverna.ui;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import ch.quazz.caverna.data.CavernaDbHelper;
 import ch.quazz.caverna.data.ScoreTable;
+import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.PlayerScore;
 import ch.quazz.caverna.R;
+import ch.quazz.caverna.widget.StoppableViewPager;
 
-public class PlayerScoreActivity extends Activity {
+public class PlayerScoreActivity extends FragmentActivity {
 
     public final static String ExtraScoreId = "ch.quazz.caverna.ScoreId";
 
@@ -21,15 +25,18 @@ public class PlayerScoreActivity extends Activity {
     private static final String Cave = "cave";
     private static final String Bonus = "bonus";
 
-    private WealthFragment wealth;
-    private FamilyFragment family;
-    private CaveFragment cave;
-    private BonusFragment bonus;
+    private PlayerScoreFragment wealth;
+    private PlayerScoreFragment family;
+    private PlayerScoreFragment cave;
+    private PlayerScoreFragment bonus;
 
     private CavernaDbHelper dbHelper;
     private PlayerScore playerScore;
 
     private long scoreId;
+
+    PlayerScorePagerAdapter pagerAdapter;
+    StoppableViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +50,12 @@ public class PlayerScoreActivity extends Activity {
             dbHelper = new CavernaDbHelper(this);
         }
 
-        setupTabFragments();
-        setupActionBarTabs();
+        pagerAdapter = new PlayerScorePagerAdapter(getSupportFragmentManager());
+        viewPager = (StoppableViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(pagerAdapter);
+
+//        setupTabFragments();
+        //setupActionBarTabs();
     }
 
     @Override
@@ -66,10 +77,14 @@ public class PlayerScoreActivity extends Activity {
             }
         });
 
-        wealth.setPlayerScore(playerScore);
+/*        wealth.setPlayerScore(playerScore);
+        wealth.setItems(Item.getWealthItems());
         family.setPlayerScore(playerScore);
+        family.setItems(Item.getFamilyItems());
         cave.setPlayerScore(playerScore);
+        cave.setItems(Item.getCaveItems());
         bonus.setPlayerScore(playerScore);
+        bonus.setItems(Item.getBonusItems());*/
 
         updateScore();
     }
@@ -94,9 +109,10 @@ public class PlayerScoreActivity extends Activity {
         String score = String.valueOf(playerScore.score());
         setTitle(getString(R.string.score) + ": " + score);
     }
+/*
 
     private void setupActionBarTabs() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getActionSupportBar();
         if (actionBar != null) {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -117,26 +133,29 @@ public class PlayerScoreActivity extends Activity {
                     .setTabListener(new TabListener(R.id.player_score_fragment, bonus, Bonus)));
         }
     }
+*/
 
     private void setupTabFragments() {
-        if (getFragmentManager() != null) {
-            wealth = (WealthFragment)getFragmentManager().findFragmentByTag(Wealth);
-            family = (FamilyFragment)getFragmentManager().findFragmentByTag(Family);
-            cave = (CaveFragment)getFragmentManager().findFragmentByTag(Cave);
-            bonus = (BonusFragment)getFragmentManager().findFragmentByTag(Bonus);
+
+
+        if (getSupportFragmentManager() != null) {
+            wealth = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Wealth);
+            family = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Family);
+            cave = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Cave);
+            bonus = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Bonus);
         }
 
         if (wealth == null) {
-            wealth = new WealthFragment();
+            wealth = new PlayerScoreFragment();
         }
         if (family == null) {
-            family = new FamilyFragment();
+            family = new PlayerScoreFragment();
         }
         if (cave == null) {
-            cave = new CaveFragment();
+            cave = new PlayerScoreFragment();
         }
         if (bonus == null) {
-            bonus = new BonusFragment();
+            bonus = new PlayerScoreFragment();
         }
     }
 
@@ -160,6 +179,48 @@ public class PlayerScoreActivity extends Activity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class PlayerScorePagerAdapter extends FragmentPagerAdapter {
+
+        private static final int NUM_TABS = 4;
+        private static final int WEALTH_FRAGMENT = 0;
+        private static final int FAMILY_FRAGMENT = 1;
+        private static final int CAVE_FRAGMENT = 2;
+        private static final int BONUS_FRAGMENT = 3;
+
+        public PlayerScorePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            PlayerScoreFragment playerScoreFragment = new PlayerScoreFragment();
+            switch (position) {
+                case WEALTH_FRAGMENT:
+                    playerScoreFragment.setPlayerScore(playerScore);
+                    playerScoreFragment.setItems(Item.getWealthItems());
+                    break;
+                case FAMILY_FRAGMENT:
+                    playerScoreFragment.setPlayerScore(playerScore);
+                    playerScoreFragment.setItems(Item.getFamilyItems());
+                    break;
+                case CAVE_FRAGMENT:
+                    playerScoreFragment.setPlayerScore(playerScore);
+                    playerScoreFragment.setItems(Item.getCaveItems());
+                    break;
+                case BONUS_FRAGMENT:
+                    playerScoreFragment.setPlayerScore(playerScore);
+                    playerScoreFragment.setItems(Item.getBonusItems());
+                    break;
+            }
+            return playerScoreFragment;
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_TABS;
         }
     }
 }

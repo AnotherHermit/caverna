@@ -1,6 +1,7 @@
 package ch.quazz.caverna.ui;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
@@ -24,6 +26,7 @@ import ch.quazz.caverna.score.Tile;
 import ch.quazz.caverna.score.TileItem;
 import ch.quazz.caverna.score.Token;
 import ch.quazz.caverna.score.TokenItem;
+import ch.quazz.caverna.widget.StoppableWrapper;
 
 class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
 
@@ -31,6 +34,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
 
     private static final int TOKEN_ROW = 0;
     private static final int TILE_ROW = 1;
+    private static final int SEPARATOR_ROW = 2;
 
     private LayoutInflater mInflater;
     private List<Item> mData;
@@ -52,9 +56,13 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
                 return new CountTokenViewHolder(tokenView, playerScore);
 
             case TILE_ROW:
-            default:
                 View tileView = mInflater.inflate(R.layout.tile_item, parent, false);
                 return new CountTileViewHolder(tileView, playerScore);
+
+            case SEPARATOR_ROW:
+            default:
+                View separatorView = mInflater.inflate(R.layout.separator, parent, false);
+                return new CountViewHolder(separatorView, playerScore);
         }
     }
 
@@ -85,8 +93,10 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
     public int getItemViewType(int position) {
         if (mData.get(position) instanceof TokenItem) {
             return TOKEN_ROW;
-        } else {
+        } else if (mData.get(position) instanceof TileItem){
             return TILE_ROW;
+        } else {
+            return SEPARATOR_ROW;
         }
     }
 
@@ -143,6 +153,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
             horizontalPicker.setSelectedItem(valueRange.indexOf(currentValue.toString()));
             horizontalPicker.setSideItems(1);
             horizontalPicker.setOnItemSelectedListener(CountTokenViewHolder.this);
+            ((StoppableWrapper)horizontalPicker.getParent()).setScrollable(true);
         }
 
         @Override
