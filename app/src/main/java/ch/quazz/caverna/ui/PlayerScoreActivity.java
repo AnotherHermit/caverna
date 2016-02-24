@@ -2,12 +2,15 @@ package ch.quazz.caverna.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 import ch.quazz.caverna.data.CavernaDbHelper;
 import ch.quazz.caverna.data.ScoreTable;
@@ -20,16 +23,6 @@ public class PlayerScoreActivity extends FragmentActivity {
 
     public final static String ExtraScoreId = "ch.quazz.caverna.ScoreId";
 
-    private static final String Wealth = "wealth";
-    private static final String Family = "family";
-    private static final String Cave = "cave";
-    private static final String Bonus = "bonus";
-
-    private PlayerScoreFragment wealth;
-    private PlayerScoreFragment family;
-    private PlayerScoreFragment cave;
-    private PlayerScoreFragment bonus;
-
     private CavernaDbHelper dbHelper;
     private PlayerScore playerScore;
 
@@ -37,6 +30,7 @@ public class PlayerScoreActivity extends FragmentActivity {
 
     PlayerScorePagerAdapter pagerAdapter;
     StoppableViewPager viewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +44,14 @@ public class PlayerScoreActivity extends FragmentActivity {
             dbHelper = new CavernaDbHelper(this);
         }
 
-        pagerAdapter = new PlayerScorePagerAdapter(getSupportFragmentManager());
         viewPager = (StoppableViewPager) findViewById(R.id.pager);
+        pagerAdapter = new PlayerScorePagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragments();
         viewPager.setAdapter(pagerAdapter);
 
-//        setupTabFragments();
-        //setupActionBarTabs();
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -77,14 +73,7 @@ public class PlayerScoreActivity extends FragmentActivity {
             }
         });
 
-/*        wealth.setPlayerScore(playerScore);
-        wealth.setItems(Item.getWealthItems());
-        family.setPlayerScore(playerScore);
-        family.setItems(Item.getFamilyItems());
-        cave.setPlayerScore(playerScore);
-        cave.setItems(Item.getCaveItems());
-        bonus.setPlayerScore(playerScore);
-        bonus.setItems(Item.getBonusItems());*/
+        pagerAdapter.setupFragments();
 
         updateScore();
     }
@@ -108,55 +97,6 @@ public class PlayerScoreActivity extends FragmentActivity {
     private void updateScore() {
         String score = String.valueOf(playerScore.score());
         setTitle(getString(R.string.score) + ": " + score);
-    }
-/*
-
-    private void setupActionBarTabs() {
-        ActionBar actionBar = getActionSupportBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.wealth_tab)
-                    .setTabListener(new TabListener(R.id.player_score_fragment, wealth, Wealth)));
-
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.family_tab)
-                    .setTabListener(new TabListener(R.id.player_score_fragment, family, Family)));
-
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.cave_tab)
-                    .setTabListener(new TabListener(R.id.player_score_fragment, cave, Cave)));
-
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.bonus_tab)
-                    .setTabListener(new TabListener(R.id.player_score_fragment, bonus, Bonus)));
-        }
-    }
-*/
-
-    private void setupTabFragments() {
-
-
-        if (getSupportFragmentManager() != null) {
-            wealth = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Wealth);
-            family = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Family);
-            cave = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Cave);
-            bonus = (PlayerScoreFragment)getSupportFragmentManager().findFragmentByTag(Bonus);
-        }
-
-        if (wealth == null) {
-            wealth = new PlayerScoreFragment();
-        }
-        if (family == null) {
-            family = new PlayerScoreFragment();
-        }
-        if (cave == null) {
-            cave = new PlayerScoreFragment();
-        }
-        if (bonus == null) {
-            bonus = new PlayerScoreFragment();
-        }
     }
 
     @Override
@@ -183,44 +123,43 @@ public class PlayerScoreActivity extends FragmentActivity {
     }
 
     private class PlayerScorePagerAdapter extends FragmentPagerAdapter {
-
-        private static final int NUM_TABS = 4;
-        private static final int WEALTH_FRAGMENT = 0;
-        private static final int FAMILY_FRAGMENT = 1;
-        private static final int CAVE_FRAGMENT = 2;
-        private static final int BONUS_FRAGMENT = 3;
+        private ArrayList<Fragment> fragments = new ArrayList<>();
 
         public PlayerScorePagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
+        public void addFragments() {
+            fragments.add(new PlayerScoreFragment());
+            ((PlayerScoreFragment)fragments.get(0)).setTitle(getString(R.string.wealth_tab));
+            fragments.add(new PlayerScoreFragment());
+            ((PlayerScoreFragment)fragments.get(1)).setTitle(getString(R.string.family_tab));
+            fragments.add(new PlayerScoreFragment());
+            ((PlayerScoreFragment)fragments.get(2)).setTitle(getString(R.string.cave_tab));
+            fragments.add(new PlayerScoreFragment());
+            ((PlayerScoreFragment)fragments.get(3)).setTitle(getString(R.string.bonus_tab));
+        }
+
+        public void setupFragments() {
+            ((PlayerScoreFragment)fragments.get(0)).setupFragment(playerScore, Item.getWealthItems());
+            ((PlayerScoreFragment)fragments.get(1)).setupFragment(playerScore, Item.getFamilyItems());
+            ((PlayerScoreFragment)fragments.get(2)).setupFragment(playerScore, Item.getCaveItems());
+            ((PlayerScoreFragment)fragments.get(3)).setupFragment(playerScore, Item.getBonusItems());
+        }
+
         @Override
         public Fragment getItem(int position) {
-            PlayerScoreFragment playerScoreFragment = new PlayerScoreFragment();
-            switch (position) {
-                case WEALTH_FRAGMENT:
-                    playerScoreFragment.setPlayerScore(playerScore);
-                    playerScoreFragment.setItems(Item.getWealthItems());
-                    break;
-                case FAMILY_FRAGMENT:
-                    playerScoreFragment.setPlayerScore(playerScore);
-                    playerScoreFragment.setItems(Item.getFamilyItems());
-                    break;
-                case CAVE_FRAGMENT:
-                    playerScoreFragment.setPlayerScore(playerScore);
-                    playerScoreFragment.setItems(Item.getCaveItems());
-                    break;
-                case BONUS_FRAGMENT:
-                    playerScoreFragment.setPlayerScore(playerScore);
-                    playerScoreFragment.setItems(Item.getBonusItems());
-                    break;
-            }
-            return playerScoreFragment;
+            return fragments.get(position);
         }
 
         @Override
         public int getCount() {
-            return NUM_TABS;
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return ((PlayerScoreFragment)fragments.get(position)).getTitle();
         }
     }
 }

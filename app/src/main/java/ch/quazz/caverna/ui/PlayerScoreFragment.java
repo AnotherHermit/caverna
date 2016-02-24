@@ -4,9 +4,7 @@ package ch.quazz.caverna.ui;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,6 +19,7 @@ public class PlayerScoreFragment extends Fragment {
 
     private PlayerScore playerScore;
     private ArrayList<Item> items;
+    private String title;
 
     void setPlayerScore(final PlayerScore playerScore) {
         this.playerScore = playerScore;
@@ -28,6 +27,19 @@ public class PlayerScoreFragment extends Fragment {
 
     public void setItems(ArrayList<Item> items) {
         this.items = items;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setupFragment(final PlayerScore playerScore, ArrayList<Item> items){
+        setItems(items);
+        setPlayerScore(playerScore);
     }
 
     @Override
@@ -44,4 +56,6 @@ public class PlayerScoreFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
+
+
 }
