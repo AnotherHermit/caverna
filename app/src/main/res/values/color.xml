@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="grey">#20808080</color>
-    <color name="blue">#200000FF</color>
-    <color name="white">#00FFFFFF</color>
+    // Primary theme colors
+    <color name="primary">#009688</color> // 500
+    <color name="primaryDark">#00796b</color> // 700
+    <color name="primaryLight">#80cbc4</color> // 200
+    <color name="accent">#795548</color> // A400
+    <color name="accentDark">#5d4037</color> // A700
+    <color name="accentLight">#bcaaa4</color> // A200
+
+    // Blacks and whites
+    <color name="black87">#de000000</color>
+    <color name="black54">#8a000000</color>
+    <color name="black38">#61000000</color>
+    <color name="black12">#1f000000</color>
+    <color name="white100">#ffffffff</color>
+    <color name="white70">#b3ffffff</color>
+    <color name="white50">#7fffffff</color>
+    <color name="white12">#1fffffff</color>
+
+    // Colors for light backgrounds
+    <color name="primaryDarkText">@color/black87</color>
+    <color name="secondaryDarkText">@color/black54</color>
+    <color name="disabledDarkText">@color/black38</color>
+
+    // Colors for dark backgrounds
+    <color name="primaryText">@color/white100</color>
+    <color name="secondaryText">@color/white70</color>
+    <color name="disabledText">@color/white50</color>
+
+    // Colors for the score pad
+    <color name="listBackgroundTitle">@color/accentLight</color>
+    <color name="listBackgroundPrimary">@color/white100</color>
+    <color name="listBackgroundSecondary">@color/white70</color>
+
+    // Color for the toolbar
+    <color name="toolbar_title">@color/primaryText</color>
+    <color name="toolbar_icon">@color/white100</color>
+
+    // Color for separator
+    <color name="separator">@color/black12</color>
+
+    // Colors for icons
+    <color name="list_icon">@color/secondaryDarkText</color>
 </resources>

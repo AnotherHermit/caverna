@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -65,8 +66,16 @@ class GamesAdapter extends BaseAdapter {
 
         String timestamp = DateFormat.getDateTimeInstance().format(new Date(games.get(position).timestamp));
 
+
+
         TextView title = (TextView)view.findViewById(R.id.item_text);
-        title.setText(timestamp);
+        title.setText(title.getResources().getText(R.string.game) + " " + String.valueOf(position + 1));
+
+        TextView description = (TextView)view.findViewById(R.id.item_description);
+        description.setText(timestamp);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
+        imageView.setImageResource(R.drawable.ic_score_pad);
 
         return view;
     }

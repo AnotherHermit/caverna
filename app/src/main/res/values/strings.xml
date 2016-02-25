@@ -88,5 +88,7 @@
     <string name="done">Done</string>
     <string name="add_player">Add Player</string>
     <string name="delete_game">Delete Game</string>
+    <string name="player">Player</string>
+    <string name="game">Game</string>
 
 </resources>

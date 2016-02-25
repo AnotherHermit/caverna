@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -63,7 +64,13 @@ class GamePlayerAdapter extends BaseAdapter {
 
         ScoreSheet sheet = scoringPad.get(position);
         TextView title = (TextView)view.findViewById(R.id.item_text);
-        title.setText(String.valueOf(sheet.player) + " " + sheet.name);
+        title.setText(sheet.name);
+
+        TextView description = (TextView)view.findViewById(R.id.item_description);
+        description.setText(description.getResources().getText(R.string.player) + " " + String.valueOf(sheet.player));
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
+        imageView.setImageResource(R.drawable.ic_player);
 
         return view;
     }

@@ -50,19 +50,19 @@ public class GameActivity extends Activity implements Toolbar.OnMenuItemClickLis
     }
     private static final List<Row> rows = new ArrayList<Row>() {
         {
-            add(new Row(ScoreSheet.Category.Animals, "Animals", R.color.white));
-            add(new Row(ScoreSheet.Category.MissingFarmAnimal, "Missing animal", R.color.grey));
-            add(new Row(ScoreSheet.Category.Grain, "Grain", R.color.white));
-            add(new Row(ScoreSheet.Category.Vegetable, "Vegetable", R.color.grey));
-            add(new Row(ScoreSheet.Category.Ruby, "Ruby", R.color.white));
-            add(new Row(ScoreSheet.Category.Dwarf, "Dwarf", R.color.grey));
-            add(new Row(ScoreSheet.Category.UnusedSpace, "Unused space", R.color.white));
-            add(new Row(ScoreSheet.Category.Tiles, "Tiles", R.color.grey));
-            add(new Row(ScoreSheet.Category.Parlors, "Parlors", R.color.white));
-            add(new Row(ScoreSheet.Category.Storages, "Storages", R.color.grey));
-            add(new Row(ScoreSheet.Category.Chambers, "Chambers", R.color.white));
-            add(new Row(ScoreSheet.Category.Assets, "Gold, Begging", R.color.grey));
-            add(new Row(ScoreSheet.Category.Total, "Total", R.color.blue));
+            add(new Row(ScoreSheet.Category.Animals, "Animals", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.MissingFarmAnimal, "Missing animal", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.Grain, "Grain", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.Vegetable, "Vegetable", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.Ruby, "Ruby", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.Dwarf, "Dwarf", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.UnusedSpace, "Unused space", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.Tiles, "Tiles", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.Parlors, "Parlors", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.Storages, "Storages", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.Chambers, "Chambers", R.color.listBackgroundPrimary));
+            add(new Row(ScoreSheet.Category.Assets, "Gold, Begging", R.color.listBackgroundSecondary));
+            add(new Row(ScoreSheet.Category.Total, "Total", R.color.listBackgroundTitle));
         }
     };
 
@@ -181,9 +181,9 @@ public class GameActivity extends Activity implements Toolbar.OnMenuItemClickLis
 
         // add rows
         TableRow players = new TableRow(this);
-        players.setBackgroundResource(R.color.blue);
+        players.setBackgroundResource(R.color.listBackgroundTitle);
         TextView title = new TextView(this);
-        title.setText("Player");
+        title.setText(R.string.player);
         players.addView(title);
 
         table.addView(players);
