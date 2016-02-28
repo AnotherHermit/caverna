@@ -59,7 +59,7 @@ public class PlayerScoreActivity extends FragmentActivity implements Toolbar.OnM
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.score);
+        toolbar.setTitle(R.string.title_activity_player_score);
         toolbar.inflateMenu(R.menu.player_score);
         toolbar.setOnMenuItemClickListener(this);
     }
@@ -106,7 +106,7 @@ public class PlayerScoreActivity extends FragmentActivity implements Toolbar.OnM
 
     private void updateScore() {
         String score = String.valueOf(playerScore.score());
-        toolbar.setTitle(getString(R.string.score) + ": " + score);
+        toolbar.setTitle(getString(R.string.title_activity_player_score) + score);
     }
 
     @Override
@@ -134,14 +134,11 @@ public class PlayerScoreActivity extends FragmentActivity implements Toolbar.OnM
         }
 
         public void addFragments() {
-            fragments.add(new PlayerScoreFragment());
-            ((PlayerScoreFragment)fragments.get(0)).setTitle(getString(R.string.wealth_tab));
-            fragments.add(new PlayerScoreFragment());
-            ((PlayerScoreFragment)fragments.get(1)).setTitle(getString(R.string.family_tab));
-            fragments.add(new PlayerScoreFragment());
-            ((PlayerScoreFragment)fragments.get(2)).setTitle(getString(R.string.cave_tab));
-            fragments.add(new PlayerScoreFragment());
-            ((PlayerScoreFragment)fragments.get(3)).setTitle(getString(R.string.bonus_tab));
+
+            fragments.add(PlayerScoreFragment.newInstance(getString(R.string.wealth_tab)));
+            fragments.add(PlayerScoreFragment.newInstance(getString(R.string.family_tab)));
+            fragments.add(PlayerScoreFragment.newInstance(getString(R.string.cave_tab)));
+            fragments.add(PlayerScoreFragment.newInstance(getString(R.string.bonus_tab)));
         }
 
         public void setupFragments() {
@@ -163,7 +160,7 @@ public class PlayerScoreActivity extends FragmentActivity implements Toolbar.OnM
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return ((PlayerScoreFragment)fragments.get(position)).getTitle();
+            return fragments.get(position).getArguments().getString("Title");
         }
     }
 }

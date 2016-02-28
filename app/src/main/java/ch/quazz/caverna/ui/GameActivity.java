@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,7 @@ public class GameActivity extends Activity implements Toolbar.OnMenuItemClickLis
     final static String ExtraGameId = "ch.quazz.caverna.GameId";
 
     private CavernaDbHelper dbHelper;
-    private GamePlayerAdapter scoringPadAdapter;
+    private GameAdapter scoringPadAdapter;
     private long gameId;
     Toolbar toolbar;
 
@@ -130,7 +129,7 @@ public class GameActivity extends Activity implements Toolbar.OnMenuItemClickLis
 
         createScoringPad(scoringPad);
 
-        scoringPadAdapter = new GamePlayerAdapter(this);
+        scoringPadAdapter = new GameAdapter(this);
         scoringPadAdapter.setScoringPad(scoringPad);
 
         ListView listView = (ListView)findViewById(R.id.game_player_list);

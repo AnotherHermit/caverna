@@ -2,9 +2,10 @@
 <resources>
     // Titles and such
     <string name="app_name">Caverna Scoring Pad</string>
-    <string name="title_activity_players">Players</string>
-    <string name="title_activity_player_score">Score</string>
-    <string name="title_activity_game">Scoring Pad</string>
+    <string name="title_activity_players">Available Players</string>
+    <string name="title_activity_player_score">Score: </string>
+    <string name="title_activity_main">Score Pads</string>
+    <string name="title_activity_game">Score Pad</string>
 
     // Tabs for player score
     <string name="wealth_tab">Wealth</string>
@@ -16,7 +17,7 @@
     <string name="score">Score</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="button_new_game">New Scoring Pad</string>
+    <string name="add_score_pad">New Scoring Pad</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="discard">Discard</string>

@@ -1,9 +1,7 @@
 package ch.quazz.caverna.ui;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
@@ -22,15 +19,13 @@ import java.util.List;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.PlayerScore;
-import ch.quazz.caverna.score.Tile;
 import ch.quazz.caverna.score.TileItem;
-import ch.quazz.caverna.score.Token;
 import ch.quazz.caverna.score.TokenItem;
 import ch.quazz.caverna.widget.StoppableWrapper;
 
-class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
+class PlayerScoreAdapter extends RecyclerView.Adapter<PlayerScoreAdapter.CountViewHolder> {
 
-    private static final String TAG = ItemAdapter.class.getSimpleName();
+    private static final String TAG = PlayerScoreAdapter.class.getSimpleName();
 
     private static final int TOKEN_ROW = 0;
     private static final int TILE_ROW = 1;
@@ -40,7 +35,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
     private List<Item> mData;
     private PlayerScore playerScore;
 
-    public ItemAdapter(Context context, List<Item> mData, final PlayerScore playerScore) {
+    public PlayerScoreAdapter(Context context, List<Item> mData, final PlayerScore playerScore) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = mData;
         this.playerScore = playerScore;

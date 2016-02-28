@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import ch.quazz.caverna.data.CavernaDbHelper;
@@ -24,7 +24,7 @@ import ch.quazz.caverna.games.Game;
 public class MainActivity extends Activity implements Toolbar.OnMenuItemClickListener {
 
     private CavernaDbHelper dbHelper;
-    private GamesAdapter gamesAdapter;
+    private MainAdapter mainAdapter;
     Toolbar toolbar;
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements Toolbar.OnMenuItemClickLis
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.title_activity_game);
+        toolbar.setTitle(R.string.title_activity_main);
         toolbar.inflateMenu(R.menu.main);
         toolbar.setOnMenuItemClickListener(this);
     }
@@ -60,23 +60,30 @@ public class MainActivity extends Activity implements Toolbar.OnMenuItemClickLis
         super.onResume();
 
         List<Game> games = GamesTable.getGames(dbHelper);
-
-        gamesAdapter = new GamesAdapter(this);
-        gamesAdapter.setGames(games);
+        Collections.reverse(games);
+        mainAdapter = new MainAdapter(this);
+        mainAdapter.setGames(games);
 
         ListView listView = (ListView)findViewById(R.id.games_list);
-        listView.setAdapter(gamesAdapter);
+        listView.setAdapter(mainAdapter);
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return true;
+        switch(item.getItemId()){
+            case R.id.main_add_score_pad:
+                newGame();
+                return true;
+
+            default:
+                return true;
+        }
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_game, menu);
+        inflater.inflate(R.menu.context_main, menu);
     }
 
     @Override
@@ -95,7 +102,8 @@ public class MainActivity extends Activity implements Toolbar.OnMenuItemClickLis
                 GamesTable.deleteGame(dbHelper, info.id);
 
                 List<Game> games = GamesTable.getGames(dbHelper);
-                gamesAdapter.setGames(games);
+                Collections.reverse(games);
+                mainAdapter.setGames(games);
 
                 return true;
 
@@ -104,7 +112,7 @@ public class MainActivity extends Activity implements Toolbar.OnMenuItemClickLis
         }
     }
 
-    public void newGame(View view) {
+    public void newGame() {
         long timestamp = Calendar.getInstance().getTimeInMillis();
         long id = GamesTable.addGame(dbHelper, timestamp);
         startGameActivity(id);

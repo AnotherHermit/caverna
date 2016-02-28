@@ -13,12 +13,12 @@ import java.util.List;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.score.ScoreSheet;
 
-class GamePlayerAdapter extends BaseAdapter {
+class GameAdapter extends BaseAdapter {
 
     private final Context context;
     private List<ScoreSheet> scoringPad;
 
-    public GamePlayerAdapter(final Context context) {
+    public GameAdapter(final Context context) {
         this.context = context;
         this.scoringPad = null;
     }

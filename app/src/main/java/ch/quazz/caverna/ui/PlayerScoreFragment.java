@@ -3,7 +3,6 @@ package ch.quazz.caverna.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +33,23 @@ public class PlayerScoreFragment extends Fragment {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public void setupFragment(final PlayerScore playerScore, ArrayList<Item> items){
         setItems(items);
         setPlayerScore(playerScore);
+    }
+
+    public static PlayerScoreFragment newInstance(String title) {
+        PlayerScoreFragment playerScoreFragment = new PlayerScoreFragment();
+        Bundle args = new Bundle();
+        args.putString("Title", title);
+        playerScoreFragment.setArguments(args);
+        return playerScoreFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        this.title = getArguments().getString("Title");
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -53,7 +62,7 @@ public class PlayerScoreFragment extends Fragment {
     public void onResume() {
         super.onResume();
         StoppableRecyclerView recyclerView = (StoppableRecyclerView) getView().findViewById(R.id.recycler);
-        ItemAdapter adapter = new ItemAdapter(getActivity(), items, playerScore);
+        PlayerScoreAdapter adapter = new PlayerScoreAdapter(getActivity(), items, playerScore);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new StoppableLinearLayoutManager(getActivity()));
     }

@@ -15,12 +15,12 @@ import java.util.List;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.games.Game;
 
-class GamesAdapter extends BaseAdapter {
+class MainAdapter extends BaseAdapter {
 
     private final Context context;
     private List<Game> games;
 
-    public GamesAdapter(final Context context) {
+    public MainAdapter(final Context context) {
         this.context = context;
         this.games = null;
     }
