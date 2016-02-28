@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Primary theme colors
-    <color name="primary">#009688</color> // 500
-    <color name="primaryDark">#00796b</color> // 700
-    <color name="primaryLight">#80cbc4</color> // 200
+    <color name="primary">#4caf50</color> // 500
+    <color name="primaryDark">#388e3c</color> // 700
+    <color name="primaryLight">#a5d6a7</color> // 200
     <color name="accent">#795548</color> // A400
     <color name="accentDark">#5d4037</color> // A700
     <color name="accentLight">#bcaaa4</color> // A200
@@ -34,8 +34,8 @@
     <color name="listBackgroundSecondary">@color/white70</color>
 
     // Color for the toolbar
-    <color name="toolbar_title">@color/primaryText</color>
-    <color name="toolbar_icon">@color/white100</color>
+    <color name="toolbar_title">@color/primaryDarkText</color>
+    <color name="toolbar_icon">@color/black87</color>
 
     // Color for separator
     <color name="separator">@color/black12</color>

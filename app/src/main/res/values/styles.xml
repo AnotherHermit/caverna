@@ -20,7 +20,7 @@
 
     <style name="TabTheme">
         <item name="android:background">@color/primary</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
     </style>
