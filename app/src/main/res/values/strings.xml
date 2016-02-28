@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    // Titles and such
     <string name="app_name">Caverna Scoring Pad</string>
+    <string name="title_activity_players">Players</string>
+    <string name="title_activity_player_score">Score</string>
+    <string name="title_activity_game">Scoring Pad</string>
+
+    // Tabs for player score
     <string name="wealth_tab">Wealth</string>
     <string name="family_tab">Family</string>
     <string name="cave_tab">Cave</string>
     <string name="bonus_tab">Bonus</string>
+
+    // Buttons
+    <string name="score">Score</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="button_new_game">New Scoring Pad</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="discard">Discard</string>
+    <string name="done">Done</string>
+    <string name="add_player">Add Player</string>
+    <string name="delete_game">Delete Game</string>
+    <string name="player">Player</string>
+    <string name="game">Game</string>
+
+    // Tokens
     <string name="dwarfs">Dwarfs</string>
     <string name="dogs">Dogs</string>
     <string name="sheep">Sheep</string>
@@ -23,20 +44,13 @@
     <string name="ruby_mines">Ruby Mines</string>
     <string name="unused_tiles">Unused Space</string>
     <string name="dwellings">Dwellings</string>
+
     <string name="stone">Stone</string>
     <string name="ore">Ore</string>
-    <string name="score">Score</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="title_activity_player_score">Score</string>
-    <string name="title_activity_game">Scoring Pad</string>
-    <string name="button_new_game">New Scoring Pad</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="title_activity_players">Players</string>
-    <string name="dogs_description">This is the descriptionID for the dogs token!</string>
-    <string name="adjacent_dwellings">Adjacent dwellings</string>
     <string name="weapons">Armed dwarfs</string>
+    <string name="adjacent_dwellings">Adjacent dwellings</string>
+
+    // Tiles
     <string name="simple_dwelling">Simple dwelling</string>
     <string name="dwelling_description">This is the description of the simple dwelling</string>
     <string name="mixed_dwelling">Mixed dwelling</string>
@@ -48,7 +62,7 @@
     <string name="miner">Miner</string>
     <string name="builder">Builder</string>
     <string name="trader">Trader</string>
-    <string name="slaughtering_cave">Slauthering Cave</string>
+    <string name="slaughtering_cave">Slaughtering Cave</string>
     <string name="cooking_cave">Cooking Cave</string>
     <string name="working_cave">Working Cave</string>
     <string name="mining_cave">Mining Cave</string>
@@ -84,11 +98,9 @@
     <string name="prayer_chamber">Prayer Chamber</string>
     <string name="writing_chamber">Writing Chamber</string>
     <string name="fodder_chamber">Fodder Chamber</string>
-    <string name="discard">Discard</string>
-    <string name="done">Done</string>
-    <string name="add_player">Add Player</string>
-    <string name="delete_game">Delete Game</string>
-    <string name="player">Player</string>
-    <string name="game">Game</string>
+
+    // Description text
+    // TODO: Display this when clicking on a tile
+    <string name="dogs_description">This is the descriptionID for the dogs token!</string>
 
 </resources>

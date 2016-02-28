@@ -154,12 +154,14 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CountViewHolder> {
             horizontalPicker.setSideItems(1);
             horizontalPicker.setOnItemSelectedListener(CountTokenViewHolder.this);
             ((StoppableWrapper)horizontalPicker.getParent()).setScrollable(true);
+
         }
 
         @Override
         public void onItemSelected(int index) {
             Log.i(TAG, "onItemSelected: " + position + "   Size: " + mData.size());
             playerScore.setCount(current.getToken(), Integer.parseInt(valueRange.get(index)));
+            ((StoppableWrapper)horizontalPicker.getParent()).reenableParentScroll();
         }
     }
 

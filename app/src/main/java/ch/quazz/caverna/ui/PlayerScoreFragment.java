@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import ch.quazz.caverna.R;
 import ch.quazz.caverna.score.Item;
 import ch.quazz.caverna.score.PlayerScore;
+import ch.quazz.caverna.widget.StoppableLinearLayoutManager;
 import ch.quazz.caverna.widget.StoppableRecyclerView;
 
 public class PlayerScoreFragment extends Fragment {
@@ -54,7 +55,7 @@ public class PlayerScoreFragment extends Fragment {
         StoppableRecyclerView recyclerView = (StoppableRecyclerView) getView().findViewById(R.id.recycler);
         ItemAdapter adapter = new ItemAdapter(getActivity(), items, playerScore);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new StoppableLinearLayoutManager(getActivity()));
     }
 
 

@@ -3,9 +3,10 @@ package ch.quazz.caverna.widget;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 
 public class StoppableRecyclerView extends RecyclerView {
-
     public StoppableRecyclerView(Context context) {
         super(context);
     }
@@ -20,5 +21,6 @@ public class StoppableRecyclerView extends RecyclerView {
 
     public void setScrollingEnabled(boolean enabled) {
         ((StoppableViewPager)getParent()).setScrollingEnabled(enabled);
+        ((StoppableLinearLayoutManager)this.getLayoutManager()).setScrollingEnabled(enabled);
     }
 }

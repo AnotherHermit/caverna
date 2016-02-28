@@ -19,7 +19,7 @@ public class StoppableViewPager extends ViewPager {
     }
 
     public void setScrollingEnabled(boolean scrollingEnabled) {
-        Log.i(TAG, "Scroll is enabled: " + scrollingEnabled);
+        //Log.i(TAG, "Scroll is enabled: " + scrollingEnabled);
         this.scrollingEnabled = scrollingEnabled;
     }
 
