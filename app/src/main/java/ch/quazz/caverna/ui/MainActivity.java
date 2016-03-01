@@ -3,6 +3,8 @@ package ch.quazz.caverna.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -21,7 +23,7 @@ import ch.quazz.caverna.R;
 import ch.quazz.caverna.data.ScoreTable;
 import ch.quazz.caverna.games.Game;
 
-public class MainActivity extends Activity implements Toolbar.OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
     private CavernaDbHelper dbHelper;
     private MainAdapter mainAdapter;
@@ -46,6 +48,14 @@ public class MainActivity extends Activity implements Toolbar.OnMenuItemClickLis
         });
 
         setToolbar();
+
+        setUpDrawer();
+    }
+
+    private void setUpDrawer() {
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.nav_drwr_fragment);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerFragment.setUpDrawer(R.id.nav_drwr_fragment, drawerLayout, toolbar);
     }
 
     private void setToolbar() {

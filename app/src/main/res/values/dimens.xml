@@ -14,4 +14,5 @@
     <dimen name="text_titles">24sp</dimen>
     <dimen name="text_score_pad">16sp</dimen>
     <dimen name="text_tabs">18sp</dimen>
+    <dimen name="toolbar_elevation">5dp</dimen>
 </resources>

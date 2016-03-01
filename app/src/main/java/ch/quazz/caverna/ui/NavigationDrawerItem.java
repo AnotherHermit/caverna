@@ -42,9 +42,9 @@ public class NavigationDrawerItem {
 
     private static String[] getTitles() {
         return new String[] {
-                "People",
-                "Computer",
-                R.string.player
+                "Home",
+                "Games",
+                "Players"
         };
     }
 
